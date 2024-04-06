@@ -1,9 +1,11 @@
 import express from 'express';
 import db from './db.js';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app=express();
-const port=3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json()); //stores in req.body
 
@@ -20,8 +22,8 @@ import menuRoutes from './routes/menuRoutes.js';
 app.use('/menu',menuRoutes);
 
 
-app.listen(port,() =>{
-    console.log(`Listening on port ${port}`);
+app.listen(PORT,() =>{
+    console.log(`Listening on port ${PORT}`);
 })
 
 //hello github

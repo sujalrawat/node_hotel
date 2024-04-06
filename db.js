@@ -1,10 +1,13 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
 //Define the mongoose connection url
-const mongooseURL='mongodb://127.0.0.1:27017/hotels'
+//const mongoURL=process.env.MONGODB_URL_LOCAL
+const mongoURL=process.env.MONGODB_URL;
 
 //Set up MongoDB connection
-mongoose.connect(mongooseURL);
+mongoose.connect(mongoURL);
 
 //Get the default connection
 //Mongoose maintains a default connection object representing the mongoDB connection
