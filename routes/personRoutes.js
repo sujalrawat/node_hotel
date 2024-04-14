@@ -1,5 +1,5 @@
 import express from 'express';
-import person from './../models/person.js'
+import Person from './../models/person.js'
 
 const router=express.Router();
 
@@ -8,7 +8,7 @@ router.post("/",async (req,res) => {
     const data= req.body; //Assuring the request body contains the person data
 
     //create a new Person document using mongoose model
-    const newPerson = new person(data);
+    const newPerson = new Person(data);
 
     //save the new
     const response= await newPerson.save();
@@ -24,7 +24,7 @@ router.post("/",async (req,res) => {
 
 router.get("/",async (req,res) => {
     try{
-        const data=await person.find();
+        const data=await Person.find();
         console.log("Data fetched");
         res.status(200).json(data)
     }catch(err){
@@ -54,7 +54,7 @@ router.put('/:id',async(req,res) =>{
     try{
         const personId = req.params.id;
         const updatedPersonData = req.body;
-        const updatedPerson = await person.findByIdAndUpdate(personId,updatedPersonData,{
+        const updatedPerson = await Person.findByIdAndUpdate(personId,updatedPersonData,{
             new:true,
             runValidators:true,
         })
@@ -72,7 +72,7 @@ router.put('/:id',async(req,res) =>{
 router.delete('/:id',async(req,res)=>{
     try{
         const personId = req.params.id;
-        const deletedPerson = await person.findByIdAndDelete(personId);
+        const deletedPerson = await Person.findByIdAndDelete(personId);
         if(!deletedPerson){
             return res.status(404).json({error:"Person not found"});
         }
